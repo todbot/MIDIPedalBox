@@ -49,25 +49,25 @@ for (pin,*rest) in button_config:
    
 ######################### MAIN LOOP ##############################
 def main():
-		doti = 0 
-		while True:
-				for i in range(len(button_config)):
-						button = debouncers[i]
-						button.update()
-						
-						(pin,onPress,onRelease) = button_config[i]
-						
-						if button.fell:
-								print("push:",pin)
-								midi.send(onPress)
-								
-						if button.rose:
-								print("release:",pin)
-								midi.send(onRelease)
-								
-				# spin internal LED around! autoshow is on
-				dot[0] = wheel(doti & 255)
-				doti = (doti+1) % 256  # run from 0 to 255
+    doti = 0 
+    while True:
+        for i in range(len(button_config)):
+            button = debouncers[i]
+            button.update()
+            
+            (pin,onPress,onRelease) = button_config[i]
+            
+            if button.fell:
+                print("push:",pin)
+                midi.send(onPress)
+                
+            if button.rose:
+                print("release:",pin)
+                midi.send(onRelease)
+                
+        # spin internal LED around! autoshow is on
+        dot[0] = wheel(doti & 255)
+        doti = (doti+1) % 256  # run from 0 to 255
 
 ######################### HELPERS ##############################
 
