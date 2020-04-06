@@ -6,5 +6,5 @@
 
 The wiring is pretty straight-forward. A single wire goes from each button to pins 1,2,3,4 and a common ground connecting everybody.
 
-<img src="./docs/pedalbox_wiring.png">
+<img width=600 src="./docs/pedalbox_wiring.png">
 ## Trinket M0 + CircuitPython USB MIDI Pedal Box
