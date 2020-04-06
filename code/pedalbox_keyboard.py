@@ -3,7 +3,7 @@
 # 2020 @todbot / Tod E. Kurt
 #
 # Extra modules needed:
-# - adafruit_hid (but only "__init.mpy", "node_on.mpy", "note_off.mpy")
+# - adafruit_hid (but only "__init.mpy", "keyboard.mpy", "keycode.mpy")
 # - adafruit_debouncer
 #
 
