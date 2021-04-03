@@ -2,9 +2,6 @@
 #
 # 2020-2021 @todbot / Tod E. Kurt
 #
-# Classic MIDI is on pin D0 and can be wired up as shown in the diagrams here:
-# https://learn.adafruit.com/classic-midi-synth-control-with-trellis-m4/midi-connections
-#
 # To use:
 #  - Copy this file as `code.py` in your Trinket's CIRCUITPY drive
 #  - Install necessary extra libraries (see below)
@@ -17,6 +14,14 @@
 # These libraries can be installed all at once with:
 #  circup install circup install adafruit_dotstar adafruit_midi adafruit_debouncer
 # Get `circup` with `pip3 install circup`
+#
+# Classic MIDI (5-pin DIN MIDI) is on pin D0 and can be wired up as shown in
+# the diagrams here:
+#  https://learn.adafruit.com/classic-midi-synth-control-with-trellis-m4/midi-connections
+# Specifically I've had luck with the following wiring:
+#  - Trinket Gnd    --> Ring of Type-B adapter --> MIDI pin 2
+#  - Trinket 3v3    --> Tip of Type-B adapter  --> MIDI pin 4
+#  - Trinket Pin D0 --> 47 ohm resistor --> Sleeve of Type-B adapter --> MIDI pin 5
 #
 
 import time
