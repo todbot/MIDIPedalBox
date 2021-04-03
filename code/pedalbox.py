@@ -32,6 +32,7 @@ from adafruit_midi.note_off         import NoteOff
 from adafruit_midi.note_on          import NoteOn
 from adafruit_debouncer import Debouncer
 
+# memory is tight on Trinket, so let's clean up before we start
 import gc
 gc.collect()
 
