@@ -1,24 +1,39 @@
-# MIDIPedalBox
+# MIDIPedalBox -- USB and Classic MIDI output on a Trinket M0
 #
-# 2020 @todbot / Tod E. Kurt
+# 2020-2021 @todbot / Tod E. Kurt
+#
+# Classic MIDI is on pin D0 and can be wired up as shown in the diagrams here:
+# https://learn.adafruit.com/classic-midi-synth-control-with-trellis-m4/midi-connections
+#
+# To use:
+#  - Copy this file as `code.py` in your Trinket's CIRCUITPY drive
+#  - Install necessary extra libraries (see below)
 #
 # Extra modules needed:
+# - adafruit_dotstar
 # - adafruit_midi (but only "__init.mpy", "node_on.mpy", "note_off.mpy")
 # - adafruit_debouncer
 #
+# These libraries can be installed all at once with:
+#  circup install circup install adafruit_dotstar adafruit_midi adafruit_debouncer
+# Get `circup` with `pip3 install circup`
+#
 
+import time
 import board
+import busio
 from digitalio import DigitalInOut, Direction, Pull
 from analogio import AnalogOut, AnalogIn
 import adafruit_dotstar as dotstar
-import time
-#import neopixel
 
 import usb_midi
 import adafruit_midi
 from adafruit_midi.note_off         import NoteOff
 from adafruit_midi.note_on          import NoteOn
 from adafruit_debouncer import Debouncer
+
+import gc
+gc.collect()
 
 # Your config!
 # Set this to be which pins you're using, and what to do
@@ -32,6 +47,8 @@ button_config = [
 debouncers = [] 
 
 midi = adafruit_midi.MIDI(midi_out=usb_midi.ports[1], out_channel=0)
+uart = busio.UART(board.D0, baudrate=31250, timeout=0.001) # initialize UART 
+classic_midi = adafruit_midi.MIDI(midi_out=uart )
 
 # One pixel connected internally!
 dot = dotstar.DotStar(board.APA102_SCK, board.APA102_MOSI, 1, brightness=0.2)
@@ -60,10 +77,12 @@ def main():
             if button.fell:
                 print("push:",pin)
                 midi.send(onPress)
+                classic_midi.send(onPress)
                 
             if button.rose:
                 print("release:",pin)
                 midi.send(onRelease)
+                classic_midi.send(onRelease)
                 
         # spin internal LED around! autoshow is on
         dot[0] = wheel(doti & 255)
@@ -86,4 +105,5 @@ def wheel(pos):
         return [0, int(pos*3), int(255 - pos*3)]
 
 # actually call main
+print("Hello MIDIPedalBox")
 main()
