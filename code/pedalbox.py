@@ -19,8 +19,8 @@
 # the diagrams here:
 #  https://learn.adafruit.com/classic-midi-synth-control-with-trellis-m4/midi-connections
 # Specifically I've had luck with the following wiring:
-#  - Trinket Gnd    --> Ring of Type-B adapter --> MIDI pin 2
-#  - Trinket 3v3    --> Tip of Type-B adapter  --> MIDI pin 4
+#  - Trinket Gnd    ----------------------> Ring of Type-B adapter   --> MIDI pin 2
+#  - Trinket 3v3    --> 47 ohm resistor --> Tip of Type-B adapter    --> MIDI pin 4
 #  - Trinket Pin D0 --> 47 ohm resistor --> Sleeve of Type-B adapter --> MIDI pin 5
 #
 
